@@ -18,16 +18,13 @@ rescue LoadError
 end
 
 require 'rake/testtask'
-Rake::TestTask.new("test_units") {|t|
-  t.pattern = 'test/ts_*.rb'
+desc "run test suite"
+Rake::TestTask.new("test") {|t|
+  t.pattern = 'test/*_test.rb'
   t.verbose = true
   t.warning = true
 }
-# Rake::TestTask.new("test_units") do |test|
-#   test.libs << 'lib' << 'test'
-#   test.pattern = 'test/ts_*.rb'
-#   test.verbose = true
-# end
+
 
 begin
   require 'rcov/rcovtask'
