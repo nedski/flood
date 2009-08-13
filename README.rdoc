@@ -1,6 +1,65 @@
 = flood
 
-Description goes here.
+Flood is a Ruby library to limit events to a count/time ratio.
+
+= Installation
+
+Install the gem using github as the source:
+
+    gem install nedski-flood -s http://gems.github.com
+    
+When requiring, use 'flood' as the gem name:
+
+    require 'flood'
+
+= Introduction
+
+There are many situations when it's desirable to limit events that occur in a
+given time period. This library provides a framework for implementing rate
+limits.
+
+Given a time interval and a maximum number of events that can occur in that
+period, the library determines whether the event should be permitted.
+
+= Storage
+
+If you want flood control to persist across invocations of a script you must
+save the data. The storage method returns the flood data; you have to handle
+storage. To load stored flood data, call the storage= method with the flood
+data as a parameter.
+
+== Examples
+
+A monitoring script should send no more than alert 1 email every 10 minutes.
+
+      email_limit = 1
+      email_interval = 10 * 60 # interval in seconds
+      flood = FloodControl.new(email_limit, email_interval)
+     
+      if (flood.check() == 0)
+        send_email
+      end
+
+A form should only accept 5 submissions from a single IP address every hour.
+
+      submit_limit = 5
+      submit_interval = 60 * 60 # interval in seconds
+      flood = FloodControl.new(submit_limit, submit_interval)
+
+      if (flood.check(ip_address) == 0)
+        send_email
+      else
+        show_sorry_page
+      end
+
+Users have varying limits based on group.
+
+      TODO: Variable limits example
+      
+Save and load flood data for persistence across invocations.
+
+      TODO: Persistence example
+
 
 == Note on Patches/Pull Requests
  
@@ -11,7 +70,7 @@ Description goes here.
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but
    bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+* Send me a pull request. 
 
 == Copyright
 
