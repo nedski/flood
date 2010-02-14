@@ -4,9 +4,9 @@ Flood is a Ruby library to limit events to a count/time ratio.
 
 = Installation
 
-Install the gem using github as the source:
+Install the gem:
 
-    gem install nedski-flood -s http://gems.github.com
+    gem install flood
     
 When requiring, use 'flood' as the gem name:
 
